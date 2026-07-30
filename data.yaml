@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Fracture']
+
+roboflow:
+  workspace: deeplearning-0xtxh
+  project: xray-2vqog-gg4rc
+  version: dataset
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/deeplearning-0xtxh/xray-2vqog-gg4rc/dataset/dataset
