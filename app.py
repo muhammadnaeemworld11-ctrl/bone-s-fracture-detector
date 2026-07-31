@@ -12,11 +12,6 @@ st.set_page_config(
 def load_model():
     return YOLO("best.pt")
 
-try:
-    new_model = load_model()
-except Exception as e:
-    st.error(f"Error loading model weights: {e}. Please make sure 'best.pt' is in your application directory.")
-    st.stop()
 
 st.sidebar.header("🔧 Model Settings")
 conf_threshold = st.sidebar.slider(
@@ -45,7 +40,7 @@ if uploaded_file:
     with col2:
         st.subheader("Object Detection")
         
-        if st.button("Run Threat Scan", use_container_width=True):
+        if st.button("Predict", use_container_width=True):
             with st.spinner("Analyzing image for weapons..."):
                 results = new_model(input_image, conf=conf_threshold)       
             
