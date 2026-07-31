@@ -28,5 +28,3 @@ if uploaded_file is not None:
                     res_plotted, channels="BGR", use_container_width=True, caption="Predicted Image"
                 )
                 
-# docker build -t bone-fracture-app .
-# docker run -p 8501:8501 bone-fracture-app
