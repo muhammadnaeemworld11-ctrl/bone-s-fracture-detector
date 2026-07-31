@@ -23,8 +23,9 @@ if uploaded_file:
         if st.button("Predict Fracture", use_container_width=True):
             with st.spinner("Analyzing..."):
                 results = new_model(input_image)       
+            
             st.image(
-                st.image = results[0].plot()  
+                results[0].plot(),  
                 channels="BGR", 
                 use_container_width=True, 
                 caption="Predicted Image"
