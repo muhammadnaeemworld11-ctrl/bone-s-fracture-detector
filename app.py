@@ -20,5 +20,5 @@ if uploaded_file:
     with col2:
         if st.button("Predict"):
             with st.spinner("Analyzing..."):
-                results = model(input_image)
+                results = new_model(input_image)
                 st.image(results[0].plot(), channels="BGR", use_container_width=True, caption="Predicted Image")
