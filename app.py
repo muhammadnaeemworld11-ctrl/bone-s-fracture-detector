@@ -1,17 +1,16 @@
-import PIL.Image
 import streamlit as st
 from ultralytics import YOLO
+from PIL import Image
 
-new_model = YOLO("best.pt")
+model = YOLO("best.pt")
 
-st.title("Bone's Fracture Detection App")
-st.write("Upload an image to detect bone's fractures")
+st.title("Bone Fracture Detection App")
+st.write("Upload an image to detect bone fractures.")
 
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
+uploaded_file = st.file_uploader("Upload Image", type=["jpg", "png", "jpeg"])
 
-if uploaded_file is not None:
-    input_image = PIL.Image.open(uploaded_file)
-
+if uploaded_file:
+    input_image = Image.open(uploaded_file)
     col1, col2 = st.columns(2)
 
     with col1:
@@ -20,11 +19,6 @@ if uploaded_file is not None:
 
     with col2:
         if st.button("Predict"):
-            with st.spinner("Analyzing image..."):
-                results = new_model(input_image)
-                res_plotted = results[0].plot()
-
-                image = st.image(
-                    res_plotted, channels="BGR", use_container_width=True, caption="Predicted Image"
-                )
-                
+            with st.spinner("Analyzing..."):
+                results = model(input_image)
+                st.image(results[0].plot(), channels="BGR", use_container_width=True, caption="Predicted Image")
