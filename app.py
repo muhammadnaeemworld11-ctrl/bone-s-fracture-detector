@@ -2,7 +2,7 @@ import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
 
-model = YOLO("best.pt")
+new_model = YOLO("best.pt")
 
 st.title("Bone Fracture Detection App")
 st.write("Upload an image to detect bone fractures.")
