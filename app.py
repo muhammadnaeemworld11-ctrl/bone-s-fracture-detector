@@ -11,7 +11,11 @@ st.set_page_config(
 @st.cache_resource
 def load_model():
     return YOLO("best.pt")
-
+try:
+    new_model = load_model()
+except Exception as e:
+    st.error(f"Error loading model weights: {e}. Please make sure 'best.pt' is in your application directory.")
+    st.stop()
 
 st.sidebar.header("🔧 Model Settings")
 conf_threshold = st.sidebar.slider(
