@@ -2,10 +2,14 @@ import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
 
-new_model = YOLO("best.pt")
+@st.cache_resource
+def load_model():
+    return YOLO("best.pt")
 
-st.title("Bone Fracture Detection App")
-st.write("Upload an image to detect bone fractures.")
+new_model = load_model()
+
+st.title("🛡️ Weapon Detection App")
+st.write("Upload an X-ray or optical image to scan for concealed weapons.")
 
 uploaded_file = st.file_uploader("Upload Image", type=["jpg", "png", "jpeg"])
 
@@ -19,14 +23,14 @@ if uploaded_file:
         st.image(input_image, use_container_width=True)
         
     with col2:
-        st.subheader("Predicted Image")
-        if st.button("Predict Fracture", use_container_width=True):
-            with st.spinner("Analyzing..."):
+        st.subheader("Object Detection")
+        
+        if st.button("Run Threat Scan", use_container_width=True):
+            with st.spinner("Scanning for weapons..."):
                 results = new_model(input_image)       
             
             st.image(
                 results[0].plot(),  
-                channels="BGR", 
                 use_container_width=True, 
-                caption="Predicted Image"
+                caption="Scan Analysis Complete"
             )
